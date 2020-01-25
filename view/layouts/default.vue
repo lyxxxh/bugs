@@ -15,7 +15,7 @@
           <el-menu-item index="/">Index</el-menu-item>
           <el-submenu index="2">
             <template slot="title">哔哩哔哩</template>
-            <el-menu-item index="/bilbil/video_download">视频下载</el-menu-item>
+            <el-menu-item index="/bilibili/video_download">视频下载</el-menu-item>
             <el-menu-item index="2-2">封面下载</el-menu-item>
           </el-submenu>
           <el-menu-item index="3" disabled>待留</el-menu-item>

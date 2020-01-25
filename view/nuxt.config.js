@@ -8,7 +8,7 @@ export default {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'bughello', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
@@ -29,7 +29,10 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src:'~plugins/element-ui', ssr: true}
+    {src:'~plugins/element-ui', ssr: true},
+    {src:'~plugins/axios', ssr: true},
+    {src:'~plugins/http', ssr: true},
+    {src:'~plugins/vue-extend', ssr: true}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -40,10 +43,26 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
   ],
-  /*
-  ** Build configuration
-  */
+  axios: {
+    debug: false,
+//    baseURL:"http://127.0.0.1:9501/api/",
+    proxy: true,
+    prefix: '/api/',
+    credentials: true
+  },
+  proxy: {
+    '/api/': {
+      target: 'http://127.0.0.1:9501/api/',
+      pathRewrite: {
+        '^/api/': '/',
+        changeOrigin: true
+      }
+    }
+  },
+
+
   build: {
     vendor: ['element-ui'],
     /*
@@ -51,5 +70,5 @@ export default {
     */
     extend (config, ctx) {
     }
-  }
+  },
 }
